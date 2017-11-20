@@ -1,21 +1,48 @@
-var somePromise = new Promise((resolve, reject) =>{
+var asyncAdd = (a, b) =>{
 
-	setTimeout(() =>{
+	return new Promise((resolve, reject) =>{
+		setTimeout(() =>{
+			if (typeof a === 'number' && typeof b === 'number') {
 
-		// resolve('It worked');
+				resolve(a + b);
+			}else{
 
-		reject('Unable to fulfill promise');
+				reject('Arguments must be numbers!');
+			}
+		}, 500);
+	});
+};
 
-	}, 2000);
+asyncAdd(3, 5).then((res) =>{
 
+	console.log(res);
+
+	return asyncAdd(res, 98);
+}).then((res) => {
+
+	console.log(res);
+}).catch((errorMessage) =>{
+
+	console.log(errorMessage);
 });
+// var somePromise = new Promise((resolve, reject) =>{
 
-somePromise.then((message) =>{
+// 	setTimeout(() =>{
 
-	console.log('succes: ', message);
+// 		// resolve('It worked');
 
-}, (errorMessage) =>{
+// 		reject('Unable to fulfill promise');
 
-	console.log('Error: ', errorMessage);
-	
-});
+// 	}, 2000);
+
+// });
+
+// somePromise.then((message) =>{
+
+// 	console.log('succes: ', message);
+
+// }, (errorMessage) =>{
+
+// 	console.log('Error: ', errorMessage);
+
+// });
